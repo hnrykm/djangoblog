@@ -16,8 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
+
+
+def redirect_home(request):
+    return redirect("home")
 
 urlpatterns = [
+    path("", redirect_home, name="homepage"),
     path("admin/", admin.site.urls),
     path("blog/", include("blog.urls")),
+    path("accounts/", include("accounts.urls")),
 ]
