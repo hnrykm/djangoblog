@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from blog.models import Post
+from blog.models import Post, Comment
 from django_summernote.widgets import SummernoteWidget
 
 class NewPostForm(ModelForm):
@@ -13,3 +13,12 @@ class NewPostForm(ModelForm):
         widgets = {
             "content": SummernoteWidget(),
         }
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = (
+            "name",
+            "email",
+            "body"
+        )

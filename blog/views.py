@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Post
 from django.contrib.auth.decorators import login_required
-from blog.forms import NewPostForm 
+from blog.forms import NewPostForm, CommentForm
 
 def posts_list(request):
     post_list = Post.objects.all()
@@ -12,9 +12,24 @@ def posts_list(request):
 
 def post_details(request, slug):
     post = get_object_or_404(Post, slug=slug)
+    comments = post.comments.filter(active=True)
+    new_comment = None
+
+    if request.method == "POST":
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.post = post
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+
     context = {
         "post": post,
         "object": post,
+        "comments": comments,
+        "new_comment": new_comment,
+        "comment_form": comment_form
     }
     return render(request, "post_detail.html", context)
 
