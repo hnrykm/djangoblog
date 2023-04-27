@@ -5,6 +5,10 @@
     <div class="col-md-8 card mb-4  mt-3 left  top">
       <div class="card-body">
         <h1>{% block title %} {{ object.title }} {% endblock title %}</h1>
+        <div>
+          <a href="{% url "edit_post" post.slug %}">Edit Post</a>&nbsp&nbsp&nbsp
+          <a href="{% url "delete_post" post.slug %}">Delete Post</a>
+        </div>
         <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
         <p class="card-text ">{{ object.content | safe }}</p>
       </div>
@@ -14,4 +18,3 @@
 </div>
 
 {% endblock content %}
-Copy
