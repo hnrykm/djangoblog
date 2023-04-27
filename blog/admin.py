@@ -1,7 +1,9 @@
+from django_summernote.admin import SummernoteModelAdmin
 from django.contrib import admin
 from blog.models import Post
 
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(SummernoteModelAdmin):
+    summernote_fields = "__all__"
     list_display = (
         "title",
         "slug",
@@ -13,3 +15,4 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
 admin.site.register(Post, PostAdmin)
+

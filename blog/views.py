@@ -34,6 +34,7 @@ def new_post(request):
     }
     return render(request, "new_post.html", context)
 
+@login_required
 def edit_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
     if request.method == "POST":
@@ -49,7 +50,7 @@ def edit_post(request, slug):
     }
     return render(request, "edit_post.html", context)
 
-
+@login_required
 def delete_post(request, slug):
     post = Post.objects.get(slug=slug)
     if request.method == "POST":

@@ -34,6 +34,7 @@
     <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8 mt-3 left">
+            <h1>{{ post.title }}</h1>
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
